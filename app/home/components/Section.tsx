@@ -42,7 +42,7 @@ function Section() {
       {/* About Section */}
       <section id="about" className="bg-gray-100 py-16 px-6">
         <div className="container mx-auto text-center">
-          <h3 className="text-3xl font-bold mb-6">Why Choose MotoCare?</h3>
+          <h3 className="text-3xl font-bold mb-6">Why Choose Us?</h3>
           <p className="max-w-2xl mx-auto text-lg">
             With certified mechanics and years of experience, we provide reliable motorcycle
             services that ensure safety and performance. Your ride deserves the best care.
