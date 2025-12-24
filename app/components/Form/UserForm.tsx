@@ -2,7 +2,7 @@ import { useState } from "react";
 import UserDetails from "./_components/UserDetails";
 import AppointmentDetails from "./_components/AppointmentDetails";
 import VehicleDetails from "./_components/VehicleDetails";
-import Stepper from "./Stepper";
+import Stepper from "../Stepper";
 
 interface FormData {
   name: string;
