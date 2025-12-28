@@ -9,7 +9,7 @@ export async function UserFooter() {
       user={{
         name: user?.user_metadata?.name || "User",
         email: user?.email || "user@example.com",
-        avatar: user?.user_metadata?.avatar_url || "/avatars/default.jpg",
+        avatar: user?.user_metadata?.avatar_url || "",
       }}
     />
   )
