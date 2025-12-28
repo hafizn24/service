@@ -24,7 +24,6 @@ export default function ApprovalPage() {
                 console.error(error)
             } else {
                 setData(service_users ?? [])
-                console.log("data", service_users)
             }
         }
 

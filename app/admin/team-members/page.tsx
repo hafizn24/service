@@ -23,20 +23,17 @@ export default function TeamMembersPage() {
         console.error("Supabase error:", error)
       } else {
         setData(users ?? [])
-        console.log("Fetched users:", users)
       }
     }
 
     fetchData()
   }, [])
 
-  return data.length > 0 ? (
+  return (
     <GenericDataTable
       data={data}
       idField="su_id"
       enableDragDrop={false}
     />
-  ) : (
-    <p>No team members pending approval.</p>
   )
 }
