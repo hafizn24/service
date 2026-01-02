@@ -29,8 +29,32 @@ export enum UserType {
 }
 
 /**
+ * Team Member Role Enum
+ * Represents different team member roles for assignment
+ */
+export enum TeamMemberRole {
+  MECHANIC = "mechanic",
+  SUPERVISOR = "supervisor",
+  MANAGER = "manager",
+  ADMIN = "admin",
+}
+
+/**
+ * Approval Status Enum
+ * Represents the approval status of orders or tasks
+ */
+export enum ApprovalStatus {
+  PENDING = "pending",
+  APPROVED = "approved",
+  REJECTED = "rejected",
+  IN_REVIEW = "in_review",
+}
+
+/**
  * Helper function to get enum values
  */
 export const paymentStatusValues = Object.values(PaymentStatus);
 export const workStatusValues = Object.values(WorkStatus);
 export const userTypeValues = Object.values(UserType);
+export const teamMemberRoleValues = Object.values(TeamMemberRole);
+export const approvalStatusValues = Object.values(ApprovalStatus);

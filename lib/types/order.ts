@@ -84,6 +84,11 @@ export interface ServiceOrderExtended extends ServiceOrder {
   hostel?: ServiceHostel | ServiceHostel[]
   // User (mechanic/admin) details (can be array from Supabase join)
   user?: ServiceUser | ServiceUser[]
+  // Display fields for UI convenience
+  customer_name?: string
+  customer_email?: string
+  customer_phone?: string
+  hostel_name?: string
 }
 
 /**
