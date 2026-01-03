@@ -2,7 +2,6 @@
 
 import { useState, useMemo, useEffect } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { GenericDataTable } from "@/components/admin/generic-data-table"
 import { Badge } from "@/components/ui/badge"
 import { toast } from "sonner"
 import type { ServiceOrderExtended } from "@/lib/types/order"
@@ -10,6 +9,7 @@ import { getOrders } from "@/app/actions/orders"
 import { useOrdersData, useOrderActions } from "./_hooks/use-orders"
 import { getOrdersColumnConfig } from "./_config/columns"
 import { OrderDeleteDialog } from "./_components/order-delete-dialog"
+import { GenericDataTable } from "@/components/admin/generic-data-table"
 import placeholderData from "./data.json"
 
 // Configuration flag - set to true to use real database, false for placeholder data
@@ -115,7 +115,8 @@ export default function OrdersPage() {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="inline-flex h-10 items-center justify-start rounded-md bg-muted p-1 text-muted-foreground mx-4 lg:mx-6">
+          {/* Mobile: Vertical tabs with full width */}
+          <TabsList className="hidden sm:inline-flex h-10 items-center justify-start rounded-md bg-muted p-1 text-muted-foreground mx-4 lg:mx-6">
             <TabsTrigger value="all-orders" className="relative">
               All Orders
               <Badge variant="outline" className="ml-2 rounded-full h-5 min-w-[1.25rem] px-1">
@@ -142,8 +143,65 @@ export default function OrdersPage() {
             </TabsTrigger>
           </TabsList>
 
+          {/* Mobile: Scrollable pill-style tabs */}
+          <div className="sm:hidden mx-4 overflow-x-auto scrollbar-hide">
+            <TabsList className="flex w-max gap-2 rounded-md bg-muted p-1 text-muted-foreground">
+              <TabsTrigger
+                value="all-orders"
+                className="flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium data-[state=active]:bg-background data-[state=active]:text-primary"
+              >
+                All Orders
+                <Badge
+                  variant="outline"
+                  className="rounded-full h-4 min-w-[1rem] px-1 text-[10px]"
+                >
+                  {allOrders.length}
+                </Badge>
+              </TabsTrigger>
+
+              <TabsTrigger
+                value="payment-pending"
+                className="flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium data-[state=active]:bg-background data-[state=active]:text-primary"
+              >
+                Pending Pay
+                <Badge
+                  variant="outline"
+                  className="rounded-full h-4 min-w-[1rem] px-1 text-[10px]"
+                >
+                  {pendingPaymentOrders.length}
+                </Badge>
+              </TabsTrigger>
+
+              <TabsTrigger
+                value="work-pending"
+                className="flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium data-[state=active]:bg-background data-[state=active]:text-primary"
+              >
+                Pending Work
+                <Badge
+                  variant="outline"
+                  className="rounded-full h-4 min-w-[1rem] px-1 text-[10px]"
+                >
+                  {pendingWorkOrders.length}
+                </Badge>
+              </TabsTrigger>
+
+              <TabsTrigger
+                value="work-completed"
+                className="flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium data-[state=active]:bg-background data-[state=active]:text-primary"
+              >
+                Completed
+                <Badge
+                  variant="outline"
+                  className="rounded-full h-4 min-w-[1rem] px-1 text-[10px]"
+                >
+                  {completedWorkOrders.length}
+                </Badge>
+              </TabsTrigger>
+            </TabsList>
+          </div>
+
           {/* Tab 1: All Orders */}
-          <TabsContent value="all-orders">
+          <TabsContent value="all-orders" className="mt-4">
             <GenericDataTable
               data={allOrders}
               {...tableProps}
@@ -151,7 +209,7 @@ export default function OrdersPage() {
           </TabsContent>
 
           {/* Tab 2: Pending Payment Orders */}
-          <TabsContent value="payment-pending">
+          <TabsContent value="payment-pending" className="mt-4">
             <GenericDataTable
               data={pendingPaymentOrders}
               {...tableProps}
@@ -159,7 +217,7 @@ export default function OrdersPage() {
           </TabsContent>
 
           {/* Tab 3: Pending Work Orders */}
-          <TabsContent value="work-pending">
+          <TabsContent value="work-pending" className="mt-4">
             <GenericDataTable
               data={pendingWorkOrders}
               {...tableProps}
@@ -167,7 +225,7 @@ export default function OrdersPage() {
           </TabsContent>
 
           {/* Tab 4: Completed Work Orders */}
-          <TabsContent value="work-completed">
+          <TabsContent value="work-completed" className="mt-4">
             <GenericDataTable
               data={completedWorkOrders}
               {...tableProps}
